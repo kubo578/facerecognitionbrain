@@ -27,15 +27,19 @@ class SignIn extends Component {
 			})
 		})
 	    .then(response => response.json())
-	    .then(data => {
-	    	if (data === 'success') {
+	    .then(user => {
+	    	if (user.id) {
+	    		this.props.loadUser(user);
                this.props.onRouteChange('home');
 	    	}
 	    })
 	}
 
+	onRegister= () => {
+		this.props.onRouteChange('register');
+	}
+
 	render() {
-		const { onRouteChange } = this.props.onRouteChange;
 		return (
 		  	<article className="br3 ba shadow-5 b--black-10 mv4 w-100 w-50-m w-25-l mw6 center">
 				<main className="pa4 black-80">
@@ -59,7 +63,7 @@ class SignIn extends Component {
 					        type="password" 
 					        name="password"  
 					        id="password"
-					        onChange={this.onPasswordChange}
+					        onChange={ this.onPasswordChange }
 				        />
 				      </div>
 				    </fieldset>
@@ -72,7 +76,7 @@ class SignIn extends Component {
 				    </div>
 					<div className="lh-copy mt3">
 					  <p 
-					   onClick={() => {onRouteChange('register')}}
+					   onClick={ this.onRegister }
 					   className="f6 link dim black db pointer"
 					  >Register</p>
 					</div>
